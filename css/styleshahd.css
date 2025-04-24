@@ -1,0 +1,1130 @@
+:root {
+    --primary-color: #C5764C;
+    --secondary-color: #B83556;
+    --background-color: #FFF5F5;
+    --text-color: #333;
+    --card-background: #DC97A5;
+    --card-active: #A4C4E3;
+    --transition-time: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    min-height: 100vh;
+    max-width: 1500px;
+    margin: 0 auto;
+    overflow-x: hidden;
+    position: relative;
+    font-size: 1rem;
+    padding: 0px;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background-color: #FFF2EF;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    gap: 5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color var(--transition-time);
+    padding: 1rem;
+    margin: 0 1rem;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--secondary-color);
+}
+
+.nav-links a.active {
+    color: #B83556; /* Change the text color to #B83556 when active */
+    font-weight: bold; /* Optional: make the active link bold */
+}
+
+.points {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: bold;
+}
+
+.cart-icon {
+    height: 24px; /* slightly larger for better click target */
+    width: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    cursor: pointer; /* <- Makes it clear it's clickable */
+    z-index: 1001; /* <- Ensures it’s above overlays */
+    position: relative; /* needed for z-index to take effect */
+}
+
+.cart-icon img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Makes the icon white */
+}
+
+.category-selector {
+    display: flex;
+    gap: 15px;
+    padding: 0 2rem;
+    margin-top: -5px;
+    margin-left: 0.2rem;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1;
+    height: 85px;
+    overflow: visible;
+}
+
+.category-button {
+    font-family: 'Judson';
+    
+    background-color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0 0 200px 200px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for the button */
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+}
+
+.category-button:hover {
+    height: 60px;
+}
+
+.category-button.active {
+    background-color: #B83556; /* Active background color */
+    color: white; /* Active text color */
+    transform: translateY(5px); /* Move the button down slightly */
+    height: 80px; /* Adjust height if needed */
+    z-index: 2; /* Ensure it appears above other elements */
+    width: 120px; /* Adjust width if needed */
+}
+
+.page-title {
+    text-align: left;
+    color: #6F9FCA;
+    font-size: 2rem;
+    margin: 0rem;
+    margin-left: auto;
+    margin-right: 0rem;
+    line-height: 1.1;
+    margin-top: -4rem;
+    font-weight: normal;
+    max-width: 700px;
+}
+
+.page-title span {
+    display: inline-block;
+    font-weight: 900;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 8rem 2rem 1rem 2rem;
+    position: relative;
+    min-height: 520px;
+    width: 100%;
+    gap: 25px;
+    justify-content: flex-start;
+    margin-left: 40px;
+    scroll-behavior: smooth;
+}
+
+.cards-wrapper {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+.card-group {
+    display: flex; /* Align cards in a row */
+    gap: 20px; /* Space between cards */
+    margin-bottom: 20px; /* Space between groups */
+}
+
+.product-card {
+    background-color: var(--card-background);
+    border-radius: 3rem;
+    padding: 1.2rem;
+    width: 300px;
+    min-width: 0;
+    flex: 0 0 calc(25% - 20px); /* Allow cards to take up 25% of the width minus the gap */
+    height: 390px;
+    transition: all var(--transition-time);
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, background-color 0.5s;
+    max-width: 300px; /* Set a max width for each card */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.product-card.composing {
+    background-color: var(--card-active);
+    transform: translateY(-10px);   
+    z-index: 2;
+    height: 540px;
+}
+
+.product-card:hover {
+    transform: scale(1.13);
+    background-color: #81A9C3;
+}
+
+.product-card:hover .product-name,
+.product-card.in-cart .product-name {
+    color: white;
+}
+
+.product-card:hover .product-description,
+.product-card.in-cart .product-description {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.product-card.in-cart {
+    background-color: var(--card-active);
+    transform: translateY(-10px);
+    z-index: 2;
+}
+
+.product-card:hover .product-image,
+.product-card.in-cart .product-image {
+    transform: translateY(-25px) scale(1.01);
+}
+
+.product-image {
+    width: 100%;
+    height: 190px;
+    object-fit: contain;
+    margin-top: -5.5rem;
+    margin-bottom: 0rem;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    transition: transform var(--transition-time);
+    transform-origin: bottom;
+    flex-shrink: 0;
+}
+
+.product-name {
+    font-size: 24px;
+    margin-bottom: 2.5rem;
+    color: #FFF2EF;
+    font-weight: bold;
+    transition: color var(--transition-time);
+    height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    text-align: center;
+    margin-top: 0.3rem;
+}
+
+.product-card.in-cart .product-name {
+    color: white;
+}
+
+.product-description {
+    color: #FFF2EF;
+    margin-bottom: 2rem;
+    font-size: 20px;
+    line-height: 1.6;
+    height: auto;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    transition: color var(--transition-time);
+    text-align: center;
+}
+
+.product-card.in-cart .product-description {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.size-selector {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.size-option {
+    text-align: center;
+    cursor: pointer;
+    position: relative; /* Position relative for absolute positioning of the circle */
+}
+
+.size-circle {
+    width: 60px; /* Size of the circle */
+    height: 60px; /* Size of the circle */
+    border-radius: 50%; /* Make it circular */
+    background-color: white; /* Default background color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto; /* Center the circle */
+    transition: background-color 0.3s; /* Smooth transition for color change */
+}
+
+.size-icon {
+    height: 25px; /* Default height for all icons */
+}
+
+.small-icon {
+    width: 25px; /* Width for small size */
+    height: 24px;
+}
+
+.medium-icon {
+    width: 25px; /* Width for medium size */
+    height: 27px;
+}
+
+.large-icon {
+    width: 25px; /* Width for large size */
+    height: 30px;
+}
+
+.size-label {
+    color: #FFF2EF;
+    font-size: 0.75rem;
+    text-transform: capitalize;
+}
+
+.size-option:hover {
+    opacity: 1;
+}
+
+.size-option:hover .size-circle {
+    transform: scale(1.1); /* Slightly enlarge the circle on hover */
+}
+
+.size-option.active {
+    opacity: 1;
+}
+
+.size-option.active .size-circle {
+    background-color: var(--secondary-color); /* Change circle color */
+}
+
+.size-option.active .size-icon {
+    filter: brightness(0) invert(1); /* Change icon color */
+}
+
+.size-option:hover .size-icon {
+    filter: invert(65%) sepia(11%) saturate(888%) hue-rotate(173deg) brightness(87%) contrast(84%);
+}
+
+.size-circle.active {
+    background-color: #B83556; /* Test hardcoded color */
+}
+
+.price-compose-container {
+    display: none; /* Hide by default */
+    flex: 1; /* Use flexbox for alignment */
+    justify-content: flex-end; /* Align items to the right */
+    align-items: center; /* Center items vertically */
+    margin-top: 30px; /* Increase space above the container */
+    margin-left: auto; /* Push to the right */
+    margin-right: 0px; /* Add space to the right */
+    transition: transform 0.3s; /* Add transition for smooth effect */
+}
+
+.product-card:hover .price-compose-container {
+    display: flex; /* Show when the card is hovered */
+    transform: translateY(-10px); /* Pop up effect */
+}
+
+/* Optional: Adjust the spacing between price and button */
+.price-compose-container .price {
+    margin-right: 10px; /* Space between price and button */
+}
+
+.price {
+    font-size: 2rem;
+    color: #B83556;
+    font-weight: bold;
+    margin-right: 5px; /* Space between price and currency */
+}
+
+.currency {
+    font-size: 2rem; /* Match the price font size */
+    color: #B83556; /* Match the price color */
+    font-weight: bold; /* Make it bold */
+}
+
+.compose-now {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem; /* Adjust padding for better spacing */
+    border-radius: 2rem;
+    width: auto; /* Set width to auto to fit the content */
+    cursor: pointer;
+    transition: all var(--transition-time);
+    font-weight: bold;
+    font-size: 1rem; /* Adjust font size as needed */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 45px; /* Ensure consistent height */
+    white-space: nowrap; /* Prevent text from wrapping */
+    margin-left: 15px; /* Increase horizontal space between price and button */
+}
+
+.compose-now:hover {
+    background-color: #a12d4a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Navigation arrows */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: transform 0.3s ease;
+ 
+}
+
+.nav-arrow img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.nav-arrow.left {
+    left: -1.8rem; /* Adjusted to move the arrow further left */
+}
+
+.nav-arrow.right {
+    right: 6.3rem;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.nav-arrow:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow.right:hover {
+    transform: translateY(-50%) rotate(180deg) scale(1.1);
+}
+
+/* Create clear spaces for arrows */
+.nav-arrow-space {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3.5rem;
+    background: var(--background-color);
+    z-index: 5;
+}
+
+.nav-arrow-space.left {
+    left: 0; /* Adjust this if necessary to ensure visibility */
+    padding-left: 4rem; /* Add padding to prevent cutting off */
+}
+
+.nav-arrow-space.right {
+    right: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    gap: 0.5rem;
+}
+
+.supplements-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--background-color);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    width: 320px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: none;
+}
+
+.supplements-modal.active {
+    display: block;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    display: none;
+}
+
+.modal-overlay.active {
+    display: block;
+}
+
+.supplements-container {
+    display: none;
+    opacity: 0;
+    transition: opacity var(--transition-time);
+    margin-top: 1rem;
+}
+
+.product-card.composing .supplements-container {
+    display: block;
+    opacity: 1;
+}
+
+.supplements-pages {
+    position: relative;
+    overflow: hidden;
+    height: 240px;
+    padding: 0 8px;
+}
+
+.supplement-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all var(--transition-time);
+}
+
+.supplement-nav-arrow:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.supplement-nav-arrow.prev {
+    left: 0;
+}
+
+.supplement-nav-arrow.next {
+    right: 0;
+}
+
+.supplement-nav-arrow img {
+    width: 12px;
+    height: 12px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.supplement-nav-arrow.next img {
+    transform: rotate(180deg);
+}
+
+.supplement-nav-arrow.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.supplements-page {
+    position: absolute;
+    width: calc(100% - 10px);
+    height: 100%;
+    transition: transform 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+    padding: 5px;
+}
+
+.supplements-page.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+    overflow-y: auto;
+}
+
+.supplements-page.previous {
+    transform: translateX(-100%);
+}
+
+.supplements-title {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.supplements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px 2px;
+}
+
+.supplement-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all var(--transition-time);
+    min-height: 48px;
+    width: 100%;
+    margin: 0;
+}
+
+.supplement-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.supplement-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.supplement-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.supplement-name {
+    color: white;
+    font-size: 0.9rem;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.supplement-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 70px;
+    justify-content: flex-end;
+}
+
+.supplement-price {
+    color: white;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    min-width: 35px;
+}
+
+.supplement-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-time);
+    flex-shrink: 0;
+}
+
+.supplement-item.selected .supplement-checkbox {
+    background: white;
+}
+
+.supplement-checkbox.checked {
+    background: #B83556;
+}
+
+.navigation-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all var(--transition-time);
+}
+
+.nav-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.modal-button {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all var(--transition-time);
+}
+
+.cancel-button {
+    background: #EEE;
+    color: #666;
+}
+
+.add-cart-button {
+    background: #B83556;
+    color: white;
+}
+
+.modal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.notification-checkmark::before {
+    content: '✓';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(150%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(150%);
+        opacity: 0;
+    }
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #B83556;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(150%);
+    opacity: 0;
+    z-index: 9999;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+    max-width: 400px;
+    pointer-events: none;
+    transition: none;
+}
+
+.notification.show {
+    animation: slideInUp 0.3s ease forwards;
+}
+
+.notification.show.hiding {
+    animation: slideOutDown 0.3s ease forwards;
+}
+
+.menu-section {
+    margin-bottom: 0rem; /* Adjust this value to increase or decrease space */
+    padding: 1.5rem; /* Optional: add padding for better spacing */
+    background-color: #FFF; /* Optional: add a background color for visibility */
+    border-radius: 8px; /* Optional: add rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+}
+
+/* Ice Cream Specific Styles ****************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+************************************************************************************************/
+.ice-cream-product-container {
+    display: flex;
+    flex-wrap: nowrap; /* Match the existing style */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    padding: 7rem 2rem 1rem 2rem; /* Increase top padding to bring ice cream cards down */
+    position: relative;
+    min-height: 520px; /* Match existing min-height */
+    width: 100%;
+    gap: 25px; /* Match existing gap */
+    justify-content: flex-start; /* Match existing alignment */
+    margin-left: 40px; /* Match existing margin */
+    scroll-behavior: smooth; /* Match existing scroll behavior */
+}
+
+.ice-cream-product-card {
+    background-color: var(--card-background);
+    border-radius: 3rem; /* Match existing border radius */
+    padding: 1.2rem; /* Match existing padding */
+    width: 300px; /* Match existing width */
+    min-width: 0;
+    flex: 0 0 auto; /* Match existing flex properties */
+    height: 390px; /* Match existing height */
+    transition: all var(--transition-time);
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Match existing shadow */
+    margin: 0.5rem; /* Match existing margin */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, background-color 0.5s; /* Match existing transitions */
+}
+
+.ice-cream-product-card:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Ice Cream Page Title Style */
+.ice-cream-page-title {
+    text-align: left;
+    color: #6F9FCA; /* Match the existing color */
+    font-size: 1.8rem; /* Decrease the font size to make the title smaller */
+    margin: 0; /* Reset margin */
+    line-height: 1.1; /* Match existing line height */
+    margin-top: 0rem; /* Adjust this value to pull the title up */
+    font-weight: normal; /* Match existing font weight */
+    max-width: 700px; /* Match existing max width */
+    padding: 0.5rem 0; /* Decrease padding to reduce height */
+    margin-right: 1rem; /* Adjust as needed */
+}
+
+.title-container {
+    display: flex;
+    justify-content: flex-start; /* Aligns the title to the left */
+    padding-right: 0rem; /* Keep this as is or adjust as needed */
+    padding-left: 2rem; /* Decrease left padding */
+    padding-top: 1rem; /* Optional: adjust top padding */
+    padding-bottom: 1rem; /* Optional: adjust bottom padding */
+    width: auto; /* Set to auto or a specific width like 80% */
+    max-width: 80%; /* Ensure it doesn't exceed the container */
+    margin-left: 60rem; /* Adjust this if necessary */
+}
+
+/* Ice Cream Product Name Style */
+.ice-cream-product-name {
+    font-size: 24px; /* Adjust font size as needed */
+    color: #FFF2EF; /* Set the desired color */
+    font-weight: bold; /* Make it bold */
+    text-align: center; /* Center the text */
+    margin: 1rem 0; /* Add margin for spacing */
+}
+
+/* Ice Cream Product Description Style */
+.ice-cream-product-description {
+    color: #FFF2EF; /* Set the desired color */
+    font-size: 18px; /* Adjust font size as needed */
+    line-height: 1.5; /* Adjust line height for readability */
+    text-align: center; /* Center the text */
+    margin: 0.5rem 0; /* Add margin for spacing */
+}
+
+/* Ice Cream Specific Price Style */
+.ice-cream-price {
+    font-size: 2rem; /* Adjust font size as needed */
+    color: #B83556; /* Set the desired color */
+    font-weight: bold; /* Make it bold */
+    text-align: center; /* Center the text */
+    margin-right: 5rem; /* Decrease right margin to reduce space */
+    margin-top: 50px;
+}
+
+/* Ice Cream Specific Compose Now Button Style */
+.ice-cream-compose-now {
+    background-color: #B83556; /* Set a specific background color */
+    color: white; /* Set text color */
+    border: none;
+    padding: 1rem 2rem; /* Adjust padding for better spacing */
+    border-radius: 2rem; /* Rounded corners */
+    cursor: pointer;
+    transition: all var(--transition-time);
+    font-weight: bold;
+    font-size: 1.1rem; /* Adjust font size as needed */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 50px; /* Ensure consistent height */
+    white-space: nowrap; /* Prevent text from wrapping */
+    margin-right:1rem; 
+    margin-top: 50px;
+}
+
+.ice-cream-compose-now:hover {
+    background-color: #a12d4a; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Drinks Specific Styles ****************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+************************************************************************************************/
+.drinks-product-container {
+    display: flex;
+    flex-wrap: nowrap; /* Match the existing style */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    padding: 7rem 2rem 1rem 2rem; /* Adjust padding as needed */
+    position: relative;
+    min-height: 520px; /* Match existing min-height */
+    width: 100%;
+    gap: 25px; /* Match existing gap */
+    justify-content: flex-start; /* Match existing alignment */
+    margin-left: 40px; /* Match existing margin */
+    scroll-behavior: smooth; /* Match existing scroll behavior */
+}
+
+.drinks-product-card {
+    background-color: var(--card-background);
+    border-radius: 3rem;
+    padding: 1.2rem;
+    width: 300px;
+    min-width: 0;
+    flex: 0 0 auto;
+    height: 390px;
+    transition: all var(--transition-time);
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.drinks-product-card:hover {
+    background-color: #81A9C3; /* Change background color on hover */
+    transform: translateY(-20px) scale(1.05); /* Pop up and scale effect */
+    height: 430px; /* Increase height on hover */
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2); /* Enhance shadow for depth */
+}
+
+.drinks-product-card:hover .price-compose-container {
+    display: flex; /* Show when the card is hovered */
+    transform: translateY(-10px); /* Pop up effect */
+}
+
+/* Drinks Page Title Style */
+.drinks-page-title {
+    text-align: left;
+    color: #6F9FCA; /* Match the existing color */
+    font-size: 1.8rem; /* Adjust font size as needed */
+    margin: 0; /* Reset margin */
+    line-height: 1.1; /* Match existing line height */
+    margin-top: 0rem; /* Adjust this value to pull the title up */
+    font-weight: normal; /* Match existing font weight */
+    max-width: 700px; /* Match existing max width */
+    padding: 0.5rem 0; /* Adjust padding as needed */
+    margin-right: 1rem; /* Adjust as needed */
+}
+
+.drinks-product-name {
+    font-size: 24px; /* Adjust font size as needed */
+    color: #FFF2EF; /* Set the desired color */
+    font-weight: bold; /* Make it bold */
+    text-align: center; /* Center the text */
+    margin: 1rem 0; /* Add margin for spacing */
+}
+
+.drinks-product-description {
+    color: #FFF2EF; /* Set the desired color */
+    font-size: 18px; /* Adjust font size as needed */
+    line-height: 1.5; /* Adjust line height for readability */
+    text-align: center; /* Center the text */
+    margin: 0.5rem 0; /* Add margin for spacing */
+} 
+.size-circle.selected {
+    background-color: #B83556;
+    color: white;
+    border-color: #B83556;
+}
+
+/* Target all iframes directly */
+iframe {
+    width: 100%; /* Set width to 100% of the parent */
+    height: 600px; /* Set a fixed height or adjust as needed */
+    border: none; /* Remove border if desired */
+    display: block; /* Ensure they are block elements */
+    margin: 40px 0; /* Add margin for spacing */
+}
+
+/* Adjust specific iframes */
+iframe[src="bakeries.html?embed=true"] {
+    margin-top:20px; /* Move down */
+    margin-left: -10px; /* Move right */
+}
+
+iframe[src="drinks.html?embed=true"] {
+    margin-top: -10px; /* Move up */
+    margin-left: -20px; /* Move left */
+}
+
+iframe[src="ice-cream.html?embed=true"] {
+    margin-top: 5px; /* Move down */
+    margin-left: 10px; /* Move right */
+}
+
+body.embed-mode .navbar {
+    display: none;
+}
+
+body.embed-mode {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    margin-top:180px ;
+}
+
+body.embed-mode .product-container {
+    margin-top: 10px;
+    padding-top: 0;
+}
+
+
+
+body.embed-mode .navbar {
+    display: none;
+}
+
+body.embed-mode {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+body.embed-mode .drinks-product-container {
+    margin-top: 0;
+    padding-top: 0;
+}

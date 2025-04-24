@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeanGo - Ice Cream</title>
+    <link rel="stylesheet" href="../css/styleshahd.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="BeanGo">
+        </div>
+        <div class="nav-links">
+            <a href="bakeries.html">Bakeries</a>
+            <a href="drinks.html">Drinks</a>
+            <a href="ice-cream.html" class="active">Ice Cream</a>
+            <a href="/pages/box.html" class="box-link">Box</a>
+        </div>
+        <div class="points">
+            <span class="cart-icon"><img src="../images/cart-icon.png" alt="Cart"></span>
+            <span>10 POINT</span>
+        </div>
+    </nav>
+
+    <div class="title-container">
+        <h1 class="page-title ice-cream-page-title">Cool Down<br>
+            <span>BeanGo's Ice Creams</span> Are Here<br>
+            to Sweeten Your Day!
+        </h1>
+    </div>
+
+    <div class="product-container ice-cream-product-container" id="product-container">
+        <!-- Products will be dynamically inserted here -->
+    </div>
+
+    <template id="product-card-template">
+        <div class="product-card ice-cream-product-card">
+            <img src="" alt="" class="product-image">
+            <h3 class="product-name ice-cream-product-name"></h3>
+            <p class="product-description ice-cream-product-description"></p>
+            <div class="size-selector">
+                <div class="size-option" data-size="small">
+                    <span class="size-icon">Small</span>
+                </div>
+                <div class="size-option" data-size="medium">
+                    <span class="size-icon">Medium</span>
+                </div>
+                <div class="size-option" data-size="large">
+                    <span class="size-icon">Large</span>
+                </div>
+            </div>
+            <div class="price-compose-container">
+                <div class="price ice-cream-price"></div>
+                <button class="compose-now ice-cream-compose-now">Compose Now</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Firebase config and main logic -->
+    <script type="module" src="../js/firebase-config.js"></script>
+    <script type="module" src="../js/ice-cream.js"></script>
+
+    <script>
+        const isEmbed = new URLSearchParams(window.location.search).get("embed") === "true";
+        if (isEmbed) {
+            document.body.classList.add("embed-mode");
+            document.querySelector('.navbar').style.display = 'none';
+        }
+    </script>
+    <script>
+        // Apply embed mode styling if ?embed=true is in the URL
+        if (window.location.search.includes('embed=true')) {
+            document.body.classList.add('embed-mode');
+        }
+    </script>
+    
+</body>
+</html>

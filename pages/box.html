@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeanGo - Box</title>
+    <link rel="stylesheet" href="../css/styleshahd.css">
+    <style>
+        /* Add spacing for iframes since embedded pages might hide navbar */
+        .menu-section iframe {
+            width: 100%;
+            height: 500px; /* adjust height as needed */
+            border: none;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="BeanGo">
+        </div>
+        <div class="nav-links">
+            <a href="bakeries.html">Bakeries</a>
+            <a href="drinks.html">Drinks</a>
+            <a href="ice-cream.html">Ice Cream</a>
+            <a href="/pages/box.html" class="box-link active">Box</a>
+        </div>
+        <div class="points">
+            <span class="cart-icon"><img src="../images/cart-icon.png" alt="Cart"></span>
+            <span>10 POINT</span>
+        </div>
+    </nav>
+
+    <h1 class="page-title">Our Menu</h1>
+
+    <div class="menu-section">
+        <iframe src="bakeries.html?embed=true"></iframe>
+    </div>
+
+    <div class="menu-section">
+        <iframe src="drinks.html?embed=true"></iframe>
+    </div>
+
+    <div class="menu-section">
+        <iframe src="ice-cream.html?embed=true"></iframe>
+    </div>
+
+    <script src="firebase-config.js"></script>
+</body>
+</html>
+

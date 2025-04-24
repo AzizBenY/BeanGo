@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BeanGo Login</title>
+  <link rel="stylesheet" href="login.css" />
+  <!-- Add Firebase SDK -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+</head>
+<body>
+  <div class="main-container">
+    <!-- Left content -->
+    <div class="left-content">
+      <h1 class="logo"><img src="images/BeanGo.png" alt="BeanGo Logo" /></h1>
+      <p class="welcome-text">
+        Welcome back to <span>BeanGo</span>! <br />
+        Please log in to continue.
+      </p>
+      <img src="images/boxx.PNG" class="sweetbox" alt="Sweet Box" />
+    </div>
+
+    <!-- Right content -->
+    <div class="form-container">
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="email" id="email" placeholder="Email Address" required />
+        <div class="password-container">
+          <input type="password" id="password" placeholder="Password" required />
+          <span id="togglePassword" class="toggle-password">
+            <!-- Eye icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+              <path d="M8 3.5C4.5 3.5 1.5 6.5 0 8c1.5 1.5 4.5 4.5 8 4.5s6.5-3 8-4.5c-1.5-1.5-4.5-4.5-8-4.5zM8 12c-2.5 0-4.5-1.5-5.5-2.5C3.5 8.5 5.5 7 8 7s4.5 1.5 5.5 2.5C12.5 10.5 10.5 12 8 12z"/>
+              <path d="M8 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </svg>
+          </span>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <p class="login-text">
+        Don't have an account? <a href="Signup.html">Sign Up</a>
+      </p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCno_NoYBRMQM6rgxgEMrH1Ssq38av4-VM",
+      authDomain: "beango-b1a75.firebaseapp.com",
+      projectId: "beango-b1a75",
+      storageBucket: "beango-b1a75.firebasestorage.app",
+      messagingSenderId: "147201367488",
+      appId: "1:147201367488:web:b614feb77f714311f23c25",
+      measurementId: "G-LP48BGR3Y0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    async function checkAdminEmail(email) {
+      const adminRef = collection(db, "Admin");
+      const q = query(adminRef, where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      return !querySnapshot.empty; // Returns true if the email exists
+    }
+
+    async function login(email, password) {
+      try {
+        console.log('Attempting to log in with:', email, password);
+
+        // Proceed with Firebase authentication
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Check if the email exists in the Admin collection
+        const isAdmin = await checkAdminEmail(email);
+        if (isAdmin) {
+          window.location.href = "dashbord.html"; // Redirect to dashbord.html for admin
+        } else {
+          // Check if the email exists in the users collection
+          const userRef = collection(db, "users");
+          const q = query(userRef, where("email", "==", email));
+          const querySnapshot = await getDocs(q);
+          if (!querySnapshot.empty) {
+            window.location.href = "../pages/index.html"; // Redirect to index.html for regular users
+          } else {
+            alert('This email is not registered as a user.');
+          }
+        }
+
+      } catch (error) {
+        // Handle different error codes
+        if (error.code === 'auth/user-not-found') {
+          alert('No user found with this email. Please sign up.');
+        } else if (error.code === 'auth/wrong-password') {
+          alert('Incorrect password. Please try again.');
+        } else if (error.code === 'auth/invalid-email') {
+          alert('The email address is not valid. Please enter a valid email.');
+        } else {
+          alert('Error: ' + error.message); // Fallback for other errors
+        }
+        console.error('Error:', error);
+      }
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        alert('Please fill all fields.');
+        return;
+      }
+
+      await login(email, password);
+    });
+
+    // Toggle password visibility
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePassword.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

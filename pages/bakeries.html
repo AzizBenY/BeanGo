@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BeanGo - Bakeries</title>
+  <link rel="stylesheet" href="../css/styleshahd.css">
+  <link rel="stylesheet" href="../tassnim/styles.css"> <!-- Ensure this is included -->
+
+  <!-- Firebase SDK -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore.js"></script>
+  <script type="module" src="../js/firebase-config.js"></script>
+  <script type="module" src="../js/bakeries.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="../images/logo.png" alt="BeanGo">
+    </div>
+    <div class="nav-links">
+      <a href="bakeries.html" class="active">Bakeries</a>
+      <a href="drinks.html">Drinks</a>
+      <a href="ice-cream.html">Ice Cream</a>
+      <a href="/pages/box.html" class="box-link">Box</a>
+    </div>
+    <div class="points">
+      <div class="cart-icon" id="openCart">
+        <img src="../images/cart-icon.png" alt="Cart">
+      </div>
+      <span>10 POINT</span>
+    </div>
+  </nav>
+
+  <!-- Category Buttons -->
+  <div class="category-selector">
+    <div class="category-button" data-category="muffins">Muffins</div>
+    <div class="category-button" data-category="sheesecake">Sheesecake</div>
+    <div class="category-button" data-category="donuts">Donuts</div>
+  </div>
+
+  <!-- Page Title -->
+  <h1 class="page-title">
+    Sweet Treats<br>
+    <span>BeanGo's Bakeries</span> Are Here<br>
+    to Sweeten Your Day!
+  </h1>
+
+  <!-- Product Container -->
+  <div class="product-container" id="product-container">
+    <div class="cards-wrapper">
+      <!-- Cards inserted dynamically -->
+    </div>
+  </div>
+
+  <!-- Product Card Template -->
+  <template id="product-card-template">
+    <div class="product-card">
+      <img src="" alt="" class="product-image">
+      <h3 class="product-name"></h3>
+      <p class="product-description"></p>
+      <div class="price-compose-container">
+        <div class="price-container"><div class="price"></div></div>
+        <div class="button-container"><button class="compose-now">Compose Now</button></div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Cart Popup Container -->
+  <div id="cartContainer"></div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay" style="display: none;"></div>
+
+  <!-- Load and activate Cart Popup -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('../tassnim/cart-popup.html')
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById('cartContainer').innerHTML = data;
+    
+          const openCartBtn = document.getElementById('openCart');
+          const closeCartBtn = document.getElementById('closeCart');
+          const overlay = document.getElementById('overlay');
+          const cartPopup = document.getElementById('cartPopup');
+    
+          openCartBtn?.addEventListener('click', () => {
+            cartPopup.style.display = 'block';
+            overlay.style.display = 'block';
+          });
+    
+          closeCartBtn?.addEventListener('click', () => {
+            cartPopup.style.display = 'none';
+            overlay.style.display = 'none';
+          });
+    
+          overlay?.addEventListener('click', () => {
+            cartPopup.style.display = 'none';
+            overlay.style.display = 'none';
+          });
+        });
+    });
+    </script>
+    
+
+  <!-- Category button logic -->
+  <script>
+    const categoryButtons = document.querySelectorAll('.category-button');
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+      });
+    });
+
+    if (window.location.search.includes('embed=true')) {
+      document.querySelector('.navbar').style.display = 'none';
+      document.body.classList.add('embed-mode');
+    }
+  </script>
+</body>
+</html>
+
