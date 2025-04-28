@@ -33,9 +33,11 @@ function renderCart() {
   if (cartItems.length === 0) {
     emptyMessage.style.display = 'block';
     cartTotal.textContent = 'Rp. 0dt';
+    if (checkoutBtn) checkoutBtn.disabled = true;
     return;
   } else {
     emptyMessage.style.display = 'none';
+    if (checkoutBtn) checkoutBtn.disabled = false;
   }
 
   cartItems.forEach((item, index) => {
@@ -64,6 +66,7 @@ function renderCart() {
   });
 
   cartTotal.textContent = `Rp. ${total}dt`;
+  if (checkoutBtn) checkoutBtn.disabled = (cartItems.length === 0);
 }
 
 // Gérer la quantité d'articles
@@ -113,3 +116,37 @@ cartPopup.addEventListener('scroll', () => {
 });
 
 renderCart(); // Affichage initial
+
+function showCartPopup() {
+  cartPopup.classList.add('open');
+  overlay.classList.add('show');
+  renderCart();
+}
+
+function hideCartPopup() {
+  cartPopup.classList.remove('open');
+  overlay.classList.remove('show');
+}
+
+// Attach to window for global access
+window.showCartPopup = showCartPopup;
+window.hideCartPopup = hideCartPopup;
+
+// Checkout and Continue Shopping logic
+const checkoutBtn = document.getElementById('checkoutBtn');
+const continueBtn = document.getElementById('continueBtn');
+
+if (checkoutBtn) {
+  checkoutBtn.onclick = function() {
+    if (cartItems.length === 0) return;
+    cartItems = [];
+    renderCart();
+    hideCartPopup();
+    // Optionally show a success message
+  };
+}
+if (continueBtn) {
+  continueBtn.onclick = function() {
+    hideCartPopup();
+  };
+}

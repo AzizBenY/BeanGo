@@ -65,7 +65,7 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">
+    <div class="logo" id="beangoLogo">
       <img src="../images/logo.png" alt="BeanGo">
     </div>
     <div class="nav-links">
@@ -137,29 +137,40 @@
         .then(res => res.text())
         .then(data => {
           document.getElementById('cartContainer').innerHTML = data;
-    
+          // Load cart logic
+          const script = document.createElement('script');
+          script.src = '../tassnim/script.js';
+          document.body.appendChild(script);
+          // Show popup on cart icon click
           const openCartBtn = document.getElementById('openCart');
-          const closeCartBtn = document.getElementById('closeCart');
-          const overlay = document.getElementById('overlay');
-          const cartPopup = document.getElementById('cartPopup');
-    
           openCartBtn?.addEventListener('click', () => {
-            cartPopup.style.display = 'block';
-            overlay.style.display = 'block';
+            if (window.showCartPopup) window.showCartPopup();
           });
-    
-          closeCartBtn?.addEventListener('click', () => {
-            cartPopup.style.display = 'none';
-            overlay.style.display = 'none';
-          });
-    
-          overlay?.addEventListener('click', () => {
-            cartPopup.style.display = 'none';
-            overlay.style.display = 'none';
-          });
+          // Attach continueBtn handler
+          const continueBtn = document.getElementById('continueBtn');
+          if (continueBtn) {
+            continueBtn.onclick = function() {
+              if (window.hideCartPopup) window.hideCartPopup();
+            };
+          }
+          // Attach backMenuBtn handler
+          const backMenuBtn = document.getElementById('backMenuBtn');
+          if (backMenuBtn) {
+            backMenuBtn.onclick = function() {
+              window.location.href = '../pages/index.html';
+            };
+          }
         });
+      // Logo click navigation
+      const logo = document.getElementById('beangoLogo');
+      if (logo) {
+        logo.style.cursor = 'pointer';
+        logo.onclick = function() {
+          window.location.href = '../pages/home.html';
+        };
+      }
     });
-    </script>
+  </script>
     
 
   <!-- Category button logic -->

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BeanGo - Box</title>
     <link rel="stylesheet" href="../css/styleshahd.css">
+    <link rel="stylesheet" href="../tassnim/styles.css">
     <style>
       .promo-bar {
         background: #B83556;
@@ -47,7 +48,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">
+        <div class="logo" id="beangoLogo">
             <img src="../images/logo.png" alt="BeanGo">
         </div>
         <div class="nav-links">
@@ -57,7 +58,9 @@
             <a href="/pages/box.html" class="box-link active">Box</a>
         </div>
         <div class="points">
-            <span class="cart-icon"><img src="../images/cart-icon.png" alt="Cart"></span>
+            <div class="cart-icon" id="openCart">
+                <img src="../images/cart-icon.png" alt="Cart">
+            </div>
             <span>10 POINT</span>
         </div>
     </nav>
@@ -72,6 +75,11 @@
     <hr class="section-separator">
     <iframe src="ice-cream.html?embed=true" class="box-iframe"></iframe>
 
+    <!-- Cart Popup Container -->
+    <div id="cartContainer"></div>
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" style="display: none;"></div>
+
     <script>
     window.addEventListener('message', function(event) {
       if (event.data && event.data.type === 'setHeight') {
@@ -83,6 +91,45 @@
             iframe.style.height = event.data.height + 'px';
           }
         });
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('../tassnim/cart-popup.html')
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById('cartContainer').innerHTML = data;
+          // Load cart logic
+          const script = document.createElement('script');
+          script.src = '../tassnim/script.js';
+          document.body.appendChild(script);
+          // Show popup on cart icon click
+          const openCartBtn = document.getElementById('openCart');
+          openCartBtn?.addEventListener('click', () => {
+            if (window.showCartPopup) window.showCartPopup();
+          });
+          // Attach continueBtn handler
+          const continueBtn = document.getElementById('continueBtn');
+          if (continueBtn) {
+            continueBtn.onclick = function() {
+              if (window.hideCartPopup) window.hideCartPopup();
+            };
+          }
+          // Attach backMenuBtn handler
+          const backMenuBtn = document.getElementById('backMenuBtn');
+          if (backMenuBtn) {
+            backMenuBtn.onclick = function() {
+              window.location.href = '../pages/index.html';
+            };
+          }
+        });
+      // Logo click navigation
+      const logo = document.getElementById('beangoLogo');
+      if (logo) {
+        logo.style.cursor = 'pointer';
+        logo.onclick = function() {
+          window.location.href = '../pages/home.html';
+        };
       }
     });
     </script>

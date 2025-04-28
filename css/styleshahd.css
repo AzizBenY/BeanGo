@@ -1114,6 +1114,7 @@ body.embed-mode .drinks-product-container {
     max-width: 100%;
     overflow: hidden;
     margin: 0 0 0 -30px; /* Shift cards left */
+    
 }
 .product-card ,.drinks-product-card,.ice-cream-product-card{
     width: 260px;
