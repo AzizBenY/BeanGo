@@ -1,0 +1,117 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('images/Slice 3.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+}
+
+/* Header section */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+   
+  
+}
+
+.logo img {
+    width: 200px;
+    height: auto;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+header button {
+    padding: 10px 20px;
+    background-color: #81A9C3;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+header button:hover {
+    background-color: #1e40af;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 30px;
+    
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #000;
+    margin-top: 90px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #81A9C3;
+    color: white;
+}
+
+/* Status buttons */
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    font-weight: bold;
+}
+
+.status.new {
+    background-color: #007BFF;
+}
+
+.status.ready {
+    background-color: #28a745;
+}
+
+.status.rejected {
+    background-color: #dc3545;
+}
+
+.status:hover {
+    opacity: 0.8;
+}
+.status-select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

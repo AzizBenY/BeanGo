@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeanGo - Box</title>
+    <link rel="stylesheet" href="../css/styleshahd.css">
+    <style>
+      .promo-bar {
+        background: #B83556;
+        color: #fff;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 1rem 0;
+        letter-spacing: 1px;
+        margin-bottom: 1.5rem;
+        z-index: 100;
+        position: sticky;
+        top: 70px;
+        width: 100%;
+      }
+      .box-iframe {
+        width: 100%;
+        min-height: 100px;
+        border: none;
+        display: block;
+        margin: 0 auto 40px auto;
+        background: white;
+        transition: height 0.3s;
+        overflow: hidden;
+      }
+      .section-separator {
+        border: none;
+        height: 3px;
+        background: #B83556;
+        margin: 40px 0 30px 0;
+        width: 100%;
+        border-radius: 1px;
+      }
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="BeanGo">
+        </div>
+        <div class="nav-links">
+            <a href="bakeries.html">Bakeries</a>
+            <a href="drinks.html">Drinks</a>
+            <a href="ice-cream.html">Ice Cream</a>
+            <a href="/pages/box.html" class="box-link active">Box</a>
+        </div>
+        <div class="points">
+            <span class="cart-icon"><img src="../images/cart-icon.png" alt="Cart"></span>
+            <span>10 POINT</span>
+        </div>
+    </nav>
+
+    <div class="promo-bar">
+      Get <b>10% OFF</b> with composing a box!
+    </div>
+
+    <iframe src="bakeries.html?embed=true" class="box-iframe"></iframe>
+    <hr class="section-separator">
+    <iframe src="drinks.html?embed=true" class="box-iframe"></iframe>
+    <hr class="section-separator">
+    <iframe src="ice-cream.html?embed=true" class="box-iframe"></iframe>
+
+    <script>
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.type === 'setHeight') {
+        // Find the iframe by src (match by pathname)
+        const iframes = document.querySelectorAll('.box-iframe');
+        iframes.forEach(iframe => {
+          // Use endsWith to match the correct iframe
+          if (iframe.src.endsWith(event.data.id + '?embed=true')) {
+            iframe.style.height = event.data.height + 'px';
+          }
+        });
+      }
+    });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,456 @@
+/* General settings */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #B83556;
+    color: white;
+    scroll-behavior: smooth;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: #B83556;
+    position: relative;
+    top: 0;
+    z-index: 999;
+    border-bottom: 1px solid white;
+  }
+  
+  .logo {
+    font-size:50px;
+    font-weight: bold;
+    font-family: 'FigmaHand', sans-serif;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 50px;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  
+  nav a.active {
+    color: #741B0D; /* Active link color */
+  }
+  
+  nav a:hover {
+    color: #741B0D; /* Change color on hover */
+  }
+  
+  /* Add this to ensure the active link is not highlighted when hovering over others */
+  nav a:hover.active {
+    color: white; /* Keep the active link color white when hovering over other links */
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+  }
+  
+  .points-btn {
+    background-color: white;
+    color: #B83556;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  /* Hero */
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 5% 0 5%;
+    margin-top: -400px;
+    margin-bottom: -250px;
+    
+  }
+  
+  .hero-text {
+    max-width: 800px;
+    margin-top: -0px; /* Adjust this value to move the text higher */
+    margin-bottom: 10px; /* Reduce margin below hero text */
+  }
+  
+  .hero-text h1 {
+    font-size: 70px; /* Adjust the overall size of the heading */
+    margin-bottom: 20px;
+  }
+  
+  .hero-text h1 .pure-text {
+    color: #E6E6E6; /* A less bright white color */
+    font-family: 'Inter', sans-serif; /* Ensure you have the Inter font imported */
+    font-weight: 400; /* Adjust weight to 400 for mixed 140 */
+    font-size: 70px; /* Adjust size for "PURE" to be smaller */
+  }
+  
+  .hero-text h1 .joy-text {
+    color: #FFFFFF; /* Set color to white */
+    font-family: 'Poppins', sans-serif; /* Keep the existing font for this part */
+    font-size: 70px; /* Adjust size for "JOY ON THE GO!" to be smaller */
+  }
+  
+  .hero-text p {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .hero-text p.description-text {
+    color: #E6E6E6; /* Same color as the word "PURE" */
+    font-family: 'Poppins', sans-serif; /* Use the same font family */
+    font-size: 26px; /* Set the size to 26px */
+    margin-bottom: 20px; /* Optional: Add some margin below */
+  }
+  
+  .hero-buttons {
+    margin-top: 10px; /* Reduce margin to minimize space below buttons */
+    margin-bottom: 0;
+  }
+  
+  .order-btn,
+  .profile-btn {
+    background-color: white;
+    color: #B83556;
+    border: none;
+    padding: 14px 28px; /* Increase padding for a larger button */
+    border-radius: 25px;
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 16px; /* Increase font size for better visibility */
+    cursor: pointer;
+    transition: transform 0.3s; /* Smooth transition for transform */
+  }
+  
+  .order-btn:hover,
+  .profile-btn:hover {
+    transform: scale(1.1); /* Scale the button up by 10% */
+  }
+  
+  /* Images inside hero */
+  .hero-image-container {
+    position: relative;
+  }
+  
+  .hero-image-container img {
+    margin: -40px;
+  }
+  
+  /* Categories */
+  .categories {
+    display: flex;
+    justify-content: space-around; /* Adjusts spacing between items */
+    align-items: center;
+    margin: -10px 0; /* Control spacing above and below the section */
+    padding: -40px 0; /* Reduce padding to make the section shorter */
+    background-color: #F8E1E1; /* Keep background color */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+  }
+  
+  .categories .item {
+    text-align: center;
+    margin: 0 10px; /* Control spacing between items */
+   
+    background-size: 80px; /* Ensure the entire image is visible */
+    background-repeat: no-repeat; /* Prevent the background from repeating */
+    padding: 40px; /* Adjust padding to create space for the background */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+     /* Center the background image */
+  }
+  
+  .categories img {
+    /* width: 90px; */ /* Comment this out or remove it */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image fits within the specified width */
+    margin-bottom: 5px; /* Decrease space below each image */
+  }
+  
+  .categories p {
+    color: #741B0D; /* Keep the text color */
+    margin-top: 10px; /* Adjust this value to move the text up or down */
+    margin-bottom: 5px; /* Adjust this value to control space below the text */
+    font-weight: 600; /* Keep the existing font weight */
+    text-align: center; /* Center the text */
+  }
+  
+  .coffee-text {
+    color: #741B0D; /* Set the text color */
+    margin-top: 10px; /* Adjust this value to move the text up or down */
+    margin-bottom: 5px; /* Space below the text */
+    position: relative; /* Allows for positioning adjustments */
+    left: 200px; /* Adjust this value to move left or right */
+  }
+  
+  .iced-drinks-text {
+    color: #741B0D; /* Set the text color */
+    margin-top: 10px; /* Adjust this value to move the text up or down */
+    margin-bottom: 100px; /* Space below the text */
+    position: relative; /* Allows for positioning adjustments */
+    left: 70px; /* Adjust this value to move left or right */
+  }
+  
+  .ice-cream-text {
+    color: #741B0D; /* Set the text color */
+    margin-top: 10px; /* Adjust this value to move the text up or down */
+    margin-bottom: 100px; /* Space below the text */
+    position: relative; /* Allows for positioning adjustments */
+    left: -60px; /* Adjust this value to move left or right */
+  }
+  
+  .bakeries-text {
+    color: #741B0D; /* Set the text color */
+    margin-top: 10px; /* Adjust this value to move the text up or down */
+    margin-bottom: 10px; /* Space below the text */
+    position: relative; /* Allows for positioning adjustments */
+    left: -200px; /* Adjust this value to move left or right */
+  }
+  
+  /* Story */
+  .story {
+    padding: 130px 5%; /* Increase padding for more space */
+    background-color: #ffffff; /* Keep background color white */
+    color: #393335; /* Text color */
+    text-align: center; /* Center align text */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+  }
+  
+  .story h2 {
+    color: #B83556;
+    font-size: 36px; /* Heading size */
+    margin-bottom: 20px; /* Space below the heading */
+    font-weight: bold; /* Bold text */
+  }
+  
+  .story h3 {
+    font-size: 24px; /* Subheading size */
+    color: #A0C4E1; /* Light blue color for subheading */
+    margin: 20px 0; /* Space around the subheading */
+    font-family: 'FigmaHand', sans-serif; /* Set font to FigmaHand */
+    font-weight: bold; /* Ensure the font is bold */
+  }
+  
+  .story p {
+    font-size: 18px; /* Paragraph font size */
+    margin-bottom: 20px; /* Space below the paragraph */
+  }
+  
+  .story-points {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 20px 0; /* Space around the list */
+  }
+  
+  .story-points li {
+    margin: 10px 0; /* Space between list items */
+    font-size: 18px; /* Font size for list items */
+  }
+  
+  /* Footer */
+  footer {
+    padding: 40px 5%;
+    background-color: #81A9C3; /* Fallback color */
+    background-image: url('../images/bg-coffee-beans 1.png'); /* Path to your image */
+    background-size: cover; /* Cover the entire footer */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    text-align: center; /* Center align text */
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: center; /* Center the footer content */
+    flex-wrap: wrap; /* Allow wrapping of content */
+    max-width: 1200px; /* Set a max width for the footer content */
+    margin: 0 auto; /* Center the footer content */
+  }
+  
+  .footer-content div {
+    margin-bottom: 20px;
+    flex: 1; /* Allow items to grow equally */
+    min-width: 200px; /* Set a minimum width for each item */
+  }
+  
+  .footer-content h4 {
+    color: #B83556; /* Set text color to #B83556 */
+    font-family: 'Quicksand', sans-serif; /* Use Quicksand font */
+    font-weight: bold; /* Make the font bold */
+    font-size: 20px; /* Adjust size as needed */
+  }
+  
+  .footer-content .beango {
+    font-family: 'FigmaHand', sans-serif; /* Use FigmaHand font */
+    font-weight: bold; /* Make the font bold */
+    font-size: 90px; /* Set font size to 70px */
+    color: #B83556; /* Set color to match the theme */
+  }
+  
+  .footer-content p {
+    margin: 5px 0;
+  }
+  
+  .copyright {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .image-item {
+    flex: 0 0 auto;
+  }
+  
+  .image-1 {
+    width: 160px; /* Adjust size for Image 1 */
+    height: auto; /* Maintain aspect ratio */
+    margin: -30px 0 0 0; /* Adjust top, right, bottom, left margins */
+    transform: translateY(5px); /* Move down by 5px */
+  }
+  
+  .image-2 {
+    width: 140px; /* Adjust size for Image 2 */
+    height: auto; /* Maintain aspect ratio */
+    margin: 5px 0 0 10px; /* Adjust top, right, bottom, left margins */
+    transform: translateY(-5px); /* Move up by 5px */
+  }
+  
+  .image-3 {
+    width: 110px; /* Adjust size for Image 3 */
+    height: auto; /* Maintain aspect ratio */
+    margin: -10px 0 0 40px; /* Adjust top, right, bottom, left margins */
+    transform: translateY(10px); /* Move down by 10px */
+  }
+  
+  @font-face {
+    font-family: 'FigmaHand';
+    src: url('path/to/your/FigmaHand.ttf') format('truetype'); /* Adjust the path */
+    font-weight: bold;
+  }
+  
+  .pure-text {
+    color: #E6E6E6; /* A less bright white color */
+    font-family: 'Inter', sans-serif; /* Ensure you have the Inter font imported */
+    font-weight: 400; /* Adjust weight to 400 for mixed 140 */
+    font-size: 60px; /* Adjust size for "PURE" to be smaller */
+  }
+  
+  .joy-text {
+    color: #FFFFFF; /* Set color to white */
+    font-family: 'Poppins', sans-serif; /* Keep the existing font for this part */
+    font-size: 70px; /* Adjust size for "JOY ON THE GO!" to be smaller */
+  }
+  
+  .description-text {
+    color: #E6E6E6; /* Same color as the word "PURE" */
+    font-family: 'Poppins', sans-serif; /* Use the same font family */
+    font-size: 26px; /* Set the size to 26px */
+    margin-bottom: 20px; /* Optional: Add some margin below */
+  }
+  
+  .background-image {
+    position: absolute; /* Position it absolutely within the hero section */
+    top: 50px; /* Align it to the top */
+    left: -1150Px; /* Align it to the left */
+    right: 0; /* Stretch it to the right */
+    bottom: -0px; /* Adjust this value to move the image further down */
+    background-image: url('../images/Asset 5.png'); /* Path to your image */
+    background-size: 16%; /* Set the size to 20% of the container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    z-index: -1; /* Send it to the back */
+  }
+  
+  .main-drink {
+    width: 550px; /* Set to desired size */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Adjust margins as needed */
+    position: relative; /* Allows for positioning adjustments */
+    top: 370px; /* Adjust vertical position */
+    left: 350px; /* Adjust horizontal position */
+  }
+  
+  .cola-image {
+    width: 500px; /* Set to desired size */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Adjust margins as needed */
+    position: relative; /* Allows for positioning adjustments */
+    top: -280px; /* Adjust vertical position */
+    left: 170px; /* Adjust horizontal position */
+  }
+  
+  .beans-image {
+    width: 350px; /* Set to desired size */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Adjust margins as needed */
+    position: relative; /* Allows for positioning adjustments */
+    top: -250px; /* Adjust vertical position */
+    left: 120px; /* Adjust horizontal position */
+  }
+  
+  .hero::after {
+    content: '';
+    display: block;
+    height: 1000px; /* Adjust depending on how much you need to cover */
+    background-color: white;
+    margin-top: -1000px; /* Little spacing after buttons */
+  }
+  
+  .coffee-image {
+    width: 90px; /* Set the desired width for the coffee image */
+    height: auto; /* Maintain aspect ratio */
+    margin: 60px 0 5px 0; /* Keep the existing margin */
+    position: relative; /* Allows for positioning adjustments */
+    left: 200px; /* Adjust this value to move left or right */
+  }
+  
+  .iced-drinks-image {
+    width: 100px; /* Set the desired width for the iced drinks image */
+    height: auto; /* Maintain aspect ratio */
+    margin: 50px 0 10px 0; /* Keep the existing margin */
+    position: relative; /* Allows for positioning adjustments */
+    left: 70px; /* Adjust this value to move left or right */
+  }
+  
+  .ice-cream-image {
+    width: 100px; /* Set the desired width for the ice cream image */
+    height: auto; /* Maintain aspect ratio */
+    margin: 50px 0 5px 0; /* Keep the existing margin */
+    position: relative; /* Allows for positioning adjustments */
+    left: -60px; /* Adjust this value to move left or right */
+  }
+  
+  .bakeries-image {
+    width: 120px; /* Increase the width for the bakeries image */
+    height: auto; /* Maintain aspect ratio */
+    margin: 120px 0 5px 0; /* Keep the existing margin */
+    position: relative; /* Allows for positioning adjustments */
+    left: -200px; /* Adjust this value to move left or right */
+  }
+  
+  /* Individual adjustments for each category item */
+  .coffee-item {
+    background-position: 80px 20px; /* Adjust this value to control the background position */
+  }
+  
+  .iced-drinks-item {
+    background-position: 15px 25px; /* Adjust this value to control the background position */
+  }
+  
+  .ice-cream-item {
+    background-position: 0px 0px; /* Adjust this value to control the background position */
+  }
+  
+  .bakeries-item {
+    background-position: -10px -5px; /* Adjust this value to control the background position */
+  }
+  
