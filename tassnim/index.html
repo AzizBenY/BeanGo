@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BeanGo Coffee Cart</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="cart-icon" id="openCart">🛒</div>
+  </nav>
+
+  <!-- Overlay flou -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Cart Pop-up -->
+  <div class="cart-popup" id="cartPopup">
+    <div class="cart-header">
+      <h3>Shopping Cart</h3>
+      <span id="closeCart" class="close-btn">&times;</span>
+    </div>
+
+    <!-- Cart Items Section -->
+    <div class="cart-items" id="cartItems">
+      <!-- Example of a product added to the cart -->
+      <div class="cart-item">
+        <div class="image-wrapper">
+          <img src="https://via.placeholder.com/60" alt="Product Image"/>
+        </div>
+        <div class="item-info">
+          <p>Espresso</p>
+          <p class="price">Rp. 15dt</p>
+        </div>
+        <div class="quantity-control">
+          <button>-</button>
+          <span>1</span>
+          <button>+</button>
+        </div>
+        <button class="remove-btn">&times;</button>
+      </div>
+      <!-- Repeat the above cart-item div for each item -->
+    </div>
+
+    <!-- Empty cart message -->
+    <p id="emptyMessage" class="empty-message">Your cart is empty ☕</p>
+
+    <!-- Order Instruction Section -->
+    <div class="order-instruction">
+      <label for="instructions">Order Instruction:</label>
+      <textarea id="instructions" placeholder="Write your special request here..."></textarea>
+    </div>
+
+    <!-- Cart Total & Order Buttons -->
+    <div class="cart-total">
+      <p>Total: <strong id="cartTotal">Rp. 0dt</strong></p>
+      <button class="order-btn">Order Now</button>
+      <p class="back-menu">Back to Menu</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BeanGo Sign Up</title>
+  <link rel="stylesheet" href="signup.css" />
+  <!-- Add Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+</head>
+<body>
+  <div class="main-container">
+    <!-- Left content -->
+    <div class="left-content">
+      <h1 class="logo"><img src="images/BeanGo.png" alt="BeanGo Logo" /></h1>
+      <p class="welcome-text">
+        Welcome to <span>BeanGo</span>! <br />
+        where we make things easy for you
+      </p>
+      <img src="images/boxx.PNG" class="sweetbox" alt="Sweet Box" />
+    </div>
+
+    <!-- Right content -->
+    <div class="form-container">
+      <h2>Create Account</h2>
+      <form id="signup-form">
+        <input type="text" id="fullName" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email Address" required />
+        <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
+        <div class="password-container">
+          <input type="password" id="password" placeholder="Password" required />
+          <span id="togglePassword" class="toggle-password">
+            <!-- Eye icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+              <path d="M8 3.5C4.5 3.5 1.5 6.5 0 8c1.5 1.5 4.5 4.5 8 4.5s6.5-3 8-4.5c-1.5-1.5-4.5-4.5-8-4.5zM8 12c-2.5 0-4.5-1.5-5.5-2.5C3.5 8.5 5.5 7 8 7s4.5 1.5 5.5 2.5C12.5 10.5 10.5 12 8 12z"/>
+              <path d="M8 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </svg>
+          </span>
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p class="login-text">
+        All ready have an account? <a href="login.html">Login</a>
+      </p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+  
+    const firebaseConfig = {
+      apiKey: "AIzaSyCno_NoYBRMQM6rgxgEMrH1Ssq38av4-VM",
+      authDomain: "beango-b1a75.firebaseapp.com",
+      projectId: "beango-b1a75",
+      storageBucket: "beango-b1a75.firebasestorage.app",
+      messagingSenderId: "147201367488",
+      appId: "1:147201367488:web:b614feb77f714311f23c25",
+      measurementId: "G-LP48BGR3Y0"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+  
+    async function signUp(fullName, email, phoneNumber, password) {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+  
+        await setDoc(doc(db, "users", user.uid), {
+          fullName,
+          phoneNumber,
+          email
+        });
+  
+        window.location.href = "../pages/index.html";
+      } catch (error) {
+        alert(error.message);
+        console.error('Error:', error);
+      }
+    }
+  
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+  
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phoneNumber = document.getElementById('phoneNumber').value.trim();
+      const password = document.getElementById('password').value;
+  
+      if (!fullName || !email || !phoneNumber || !password) {
+        alert('Please fill all fields.');
+        return;
+      }
+  
+      if (password.length < 6) {
+        alert('Password must be at least 6 characters.');
+        return;
+      }
+  
+      await signUp(fullName, email, phoneNumber, password);
+    });
+
+    // Toggle password visibility
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePassword.classList.toggle('active');
+    });
+  </script>
+  
+</body>
+</html>

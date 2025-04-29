@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #feeeec;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #feeeec;
+    border-bottom: 1px solid #f0cfcf;
+  }
+
+  .logo img {
+    width: 140px; /* or whatever size fits best */
+    height: auto;
+    display: block;
+    
+  }
+
+  .logo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Brush Script MT', cursive;
+    color: #b46742;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .main-menu {
+    display: flex;
+    list-style: none;
+    gap: 200px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .main-menu li {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ba7743;
+    cursor: pointer;
+  }
+
+  .main-menu li.active {
+   
+    color: #B83556;
+  }
+  
+  
+
+
+  .active-menu {
+    color: #B83556;
+  }
+
+  .cart {
+    background-color: #c3734b;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cart.active {
+    background-color: #B83556;
+  }
+
+  .sub-tabs {
+    display: flex;
+    gap: 20px;
+    padding: 0px 50px 0;
+  }
+
+  .tab {
+    background-color: white;
+    padding: 15px 23px;
+    height: 50px;
+    width:60px;
+    border-radius: 0 0 55px 55px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #B83556;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab.active {
+    background-color: #B83556;
+    color: white;
+    height: 80px;
+    
+  }
+
+  .section-display {
+    padding: 40px 50px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #B83556;
+  }
