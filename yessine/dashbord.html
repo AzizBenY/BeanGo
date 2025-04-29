@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management Dashboard</title>
+    <link rel="stylesheet" href="Dashbord.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="images/BeanGo2.png" alt="BeanGo Logo" />
+        </div>
+        <div class="header-buttons">
+            <button class="create-order">+ Create order</button>
+            <button id="logoutButton" class="logout">Log out</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ORDER</th>
+                    <th>NUMBER</th>
+                    <th>ITEM</th>
+                    <th>ORDER NAME</th>
+                    <th>DESCRIPTION</th>
+                    <th>ON SITE/DELIVERY</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example rows -->
+                <tr>
+                    <td>Caramel Coffee</td>
+                    <td>3001</td>                    
+                    <td>1</td>
+                    <td>Ines Bouguerra</td>
+                    <td>Hot, medium size, with whipped cream</td>
+                    <td>Delivery</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Strawberry Smoothie</td>
+                    <td>3002</td>                   
+                    <td>2</td>
+                    <td>Mehdi Gharbi</td>
+                    <td>Cold, large size, with protein boost</td>
+                    <td>On Site</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Vanilla Ice Cream</td>
+                    <td>3003</td>                   
+                    <td>3</td>
+                    <td>Sana Kacem</td>
+                    <td>Small cups, with chocolate chips</td>
+                    <td>Delivery</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Chocolate Donuts</td>
+                    <td>3004</td>                    
+                    <td>4</td>
+                    <td>Walid Mbarek</td>
+                    <td>Glazed, extra sprinkles, standard size</td>
+                    <td>On Site</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Mocha Frappe</td>
+                    <td>3005</td>                   
+                    <td>1</td>
+                    <td>Nour Mejri</td>
+                    <td>Cold, large, with caramel drizzle</td>
+                    <td>Delivery</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Maple Donuts</td>
+                    <td>3006</td>                    
+                    <td>2</td>
+                    <td>Firas Ayadi</td>
+                    <td>Standard, with nuts and icing sugar</td>
+                    <td>On Site</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Espresso</td>
+                    <td>3007</td>                   
+                    <td>1</td>
+                    <td>Karim Hammami</td>
+                    <td>Hot, small, double shot</td>
+                    <td>On Site</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Mango Smoothie</td>
+                    <td>3008</td>
+                    <td>2</td>
+                    <td>Rim Frikha</td>
+                    <td>Cold, large, with chia seeds</td>
+                    <td>Delivery</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Chocolate Ice Cream</td>
+                    <td>3009</td>                    
+                    <td>3</td>
+                    <td>Adem Baccar</td>
+                    <td>Medium cones, with crushed almonds</td>
+                    <td>On Site</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Cappuccino</td>
+                    <td>3010</td>                  
+                    <td>1</td>
+                    <td>Marwa Sliti</td>
+                    <td>Hot, medium, with cinnamon sprinkle</td>
+                    <td>Delivery</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Glazed Donuts</td>
+                    <td>3011</td>               
+                    <td>4</td>
+                    <td>Oussama Jaziri</td>
+                    <td>Standard size, with chocolate topping</td>
+                    <td>On Site</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                <tr>
+                    <td>Latte</td>
+                    <td>3012</td>                    
+                    <td>2</td>
+                    <td>Saida Ben Amor</td>
+                    <td>Hot, large, with oat milk</td>
+                    <td>Delivery</td>
+                    <td class="status-placeholder"></td>
+                </tr>
+                
+                
+                <!-- Add more rows as needed -->
+            </tbody>
+            
+        </table>
+    </div>
+
+
+    <script>
+        // Logout button functionality
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            window.location.href = "/pages/home.html"; // Redirect to home.html
+        });
+
+        function createStatusCell() {
+            const td = document.createElement('td');
+            const select = document.createElement('select');
+            select.classList.add('status-select');
+    
+            const statuses = [
+                { value: 'new', text: 'New order', color: '#DBEAFE' },
+                { value: 'preparing', text: 'Preparing', color: '#FEF3C7' },
+                { value: 'ready', text: 'Ready', color: '#D1FAE5' },
+                { value: 'delivered', text: 'Delivered', color: '#FCE7F3' }
+            ];
+    
+            statuses.forEach(status => {
+                const option = document.createElement('option');
+                option.value = status.value;
+                option.textContent = status.text;
+                select.appendChild(option);
+            });
+    
+            // Set initial to grey regardless of selected option
+            select.style.backgroundColor = '#DBEAFE';
+    
+            // Change background color based on selected status
+            select.addEventListener('change', function () {
+                const selected = statuses.find(s => s.value === this.value);
+                this.style.backgroundColor = selected ? selected.color : '#6c757d';
+            });
+    
+            td.appendChild(select);
+            return td;
+        }
+    
+        // Replace all placeholders with status selects
+        document.querySelectorAll('.status-placeholder').forEach(td => {
+            const newTd = createStatusCell();
+            td.replaceWith(newTd);
+        });
+    </script>
+    
+    
+    
+
+</body>
+
+
+</html>

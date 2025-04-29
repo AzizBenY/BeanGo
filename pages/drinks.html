@@ -1,0 +1,339 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BeanGo - Drinks</title>
+        <link rel="stylesheet" href="../css/styleshahd.css">
+        <!-- Firebase SDK -->
+        <script type="module" src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+        <script type="module" src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore.js"></script>
+       
+        <style>
+            .embed-mode {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #FFF2EF !important;
+            }
+            .embed-mode .navbar,
+            .embed-mode .page-title {
+                display: none !important;
+            }
+            .embed-mode .product-container,
+            .embed-mode .category-selector {
+                margin: 0 !important;
+                margin-top: -5px !important;
+                padding: 0 !important;
+                background: #FFF2EF !important;
+            }
+            .embed-mode .product-container,
+            .embed-mode .drinks-product-wrapper {
+                max-height: none !important;
+                overflow: visible !important;
+                height: auto !important;
+                width: 100% !important;
+                display: block !important;
+            }
+            .embed-mode .drinks-product-wrapper {
+                margin-left: -35px !important;
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                gap: 16px !important;
+                justify-content: center !important;
+                align-items: stretch !important;
+            }
+            .embed-mode .drinks-product-wrapper .drinks-product-card {
+                margin-top: 120px !important;
+                flex: 0 1 300px !important;
+                max-width: 350px !important;
+                min-width: 200px !important;
+                box-sizing: border-box !important;
+            }
+            .embed-mode .nav-arrow.left {
+                margin-left: 20px !important;
+            }
+            .embed-mode .nav-arrow.right {
+                margin-right: 20px !important;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="../images/logo.png" alt="BeanGo">
+            </div>
+            <div class="nav-links">
+                <a href="bakeries.html">Bakeries</a>
+                <a href="drinks.html" class="active">Drinks</a>
+                <a href="ice-cream.html">Ice Cream</a>
+                <a href="box.html" class="box-link">Box</a>
+            </div>
+            <div class="points">
+                <span class="cart-icon"><img src="../images/cart-icon.png" alt="Cart"></span>
+                <span>10 POINT</span>
+            </div>
+        </nav>
+
+        <div class="category-selector">
+            <div class="category-button" data-category="freshy">Freshy</div>
+            <div class="category-button" data-category="coffee">Coffee</div>
+            <div class="category-button" data-category="smoothie">Smoothie</div>
+        </div>
+
+        <h1 class="page-title">Sweet Treats<br>
+        <span>BeanGo's Drinks</span> Are Here<br>
+        to Perk You Up!</h1>
+        
+        <div class="product-container" id="product-container">
+            <div class="nav-arrow-space left"></div>
+            <div class="nav-arrow-space right"></div>
+            <button class="nav-arrow left">
+                <img src="../images/arrow1.png" alt="Previous">
+            </button>
+            <button class="nav-arrow right">
+                <img src="../images/arrow1.png" alt="Next">
+            </button>
+            <div class="drinks-product-wrapper" id="drinks-product-wrapper">
+                <!-- Cards will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <template id="product-card-template">
+            <div class="drinks-product-card">
+                <img src="" alt="" class="product-image">
+                <h3 class="drinks-product-name"></h3>
+                <p class="drinks-product-description"></p>
+                
+                <div class="size-selector">
+                    <div class="size-option" data-size="small">
+                        <div class="size-circle" data-size="small">
+                            <img src="../images/small.png" alt="Small" class="size-icon small-icon">
+                        </div>
+                        <span class="size-label">Small</span>
+                    </div>
+                    <div class="size-option" data-size="medium">
+                        <div class="size-circle" data-size="medium">
+                            <img src="../images/medium.png" alt="Medium" class="size-icon medium-icon">
+                        </div>
+                        <span class="size-label">Medium</span>
+                    </div>
+                    <div class="size-option" data-size="large">
+                        <div class="size-circle" data-size="large">
+                            <img src="../images/Large2.png" alt="Large" class="size-icon large-icon">
+                        </div>
+                        <span class="size-label">Large</span>
+                    </div>
+                </div>
+                
+                <div class="price-compose-container">
+                    <div class="price">0</div>
+                    <span class="currency"></span>
+                    <button class="compose-now">Compose Now</button>
+                </div>
+                <div class="quantity-selector" style="display: none;">
+                    <button class="quantity-btn minus">&#8722;</button>
+                    <span class="quantity-value">1</span>
+                    <button class="quantity-btn plus">&#43;</button>
+                </div>
+                        <!-- New section for supplements -->
+        <div class="supplements" style="display: none;">
+            <h4 class="supplements-title">Supplements</h4>
+            <div class="whipped-cream">
+            <div class="whipped-cream-item whipped-cream-1">
+                <img src="../images/a0743dcdd8de8f8bcea181b57caf37ad-removebg-preview 3.png" alt="Whipped Cream 1">
+                <p class="pricesup">2dt</p>
+            </div>
+            <div class="whipped-cream-item whipped-cream-2">
+                <img src="../images/109dfe1a-0bd2-48b2-91ca-c0f5950a5503 2.png" alt="Whipped Cream 2">
+                <p class="pricesup">1dt</p>
+            </div>
+            <div class="whipped-cream-item whipped-cream-3">
+                <img src="../images/259f5f81c67001b5e968bc019fe7e2d0-removebg-preview 2.png" alt="Whipped Cream 3">
+                <p class="pricesup">2dt</p>
+            </div>
+            <div class="whipped-cream-item whipped-cream-4">
+                <img src="../images/vecteezy_yellow-whipped-cream-png-with-ai-generated_34339019 3.png" alt="Whipped Cream 4">
+                <p class="pricesup">1.5dt</p>
+            </div>
+            </div>
+            <div class="syrups">
+            <h4 class="syrups-title"></h4>
+            <div class="syrup-items">
+                <div class="syrup-item syrup-1">
+                <img src="../images/136530056_84f5ddb4-09a4-4442-8abe-c2e757824799 1.png" alt="Syrup 1">
+                <p class="pricesup">1.5dt</p>
+                </div>
+                <div class="syrup-item syrup-2">
+                <img src="../images/137447085_e92aeccf-2b3a-4eec-b6fe-59e2d37835ca 1.png" alt="Syrup 2">
+                <p class="pricesup">2dt</p>
+                </div>
+                <div class="syrup-item syrup-3">
+                <img src="../images/f8d1ef2cc6bfdf38a84374b06e3f1e44-removebg-preview 3.png" alt="Syrup 3">
+                <p class="pricesup">1.5dt</p>
+                </div>
+                <div class="syrup-item syrup-4">
+                <img src="../images/e9c42eb931c0a1801f6b0c0f4120eacf-removebg-preview 3.png" alt="Syrup 4">
+                <p class="pricesup">2dt</p>
+                </div>
+            </div>
+            </div>
+            <div class="milk-supplements">
+            <div class="milk-item">
+                <img src="../images\unsplash_juBur46D3VI.png" alt="Milk Bottle">
+                <div class="milk-options">
+                <div class="milk-option">
+                    <span>soy</span>
+                    <span>       1dt</span>
+                    <div class="checkbox-container">
+                    <input type="checkbox" class="checkbox-position" data-price="1">
+                    </div>
+                </div>
+                <div class="milk-option">
+                    <span>oat</span>
+                    <span>        1dt</span>
+                    <div class="checkbox-container">
+                    <input type="checkbox" class="checkbox-position" data-price="1">
+                    </div>
+                </div>
+                <div class="milk-option">
+                    <span>almond</span>
+                    <span>1dt</span>
+                    <div class="checkbox-container">
+                    <input type="checkbox" class="checkbox-position" data-price="1">
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+            <div class="sprinkles-item">
+                <img src="../images\Capture_d_écran_2025-04-21_002255-removebg-preview 1.png" alt="Sprinkles">
+                <div class="sprinkles-options">
+                <div class="sprinkle-option">
+                    <span>Chips</span>
+                    <span>1dt</span>
+                    <div class="checkbox-container">
+                        <input type="checkbox" class="checkbox-position" data-price="1">
+                    </div>
+                </div>
+                <div class="sprinkle-option">
+                    <span>Hazelnut</span>
+                    <span>1dt</span>
+                    <div class="checkbox-container">
+                        <input type="checkbox" class="checkbox-position" data-price="1">
+                    </div>
+                </div>
+                <div class="sprinkle-option">
+                    <span>Sprinkles</span>
+                    <span>1dt</span>
+                    <div class="checkbox-container">
+                        <input type="checkbox" class="checkbox-position" data-price="1">
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            
+            <button class="add-to-cart" style="display: none;">Add to Cart</button>
+        </div>
+        </div>
+            </div>
+        </template>
+
+        <script type="module" src="../js/firebase-config.js"></script>
+        <script type="module" src="../js/drinks.js"></script>
+        
+
+        <script>
+            // Handle category selection
+            const categoryButtons = document.querySelectorAll('.category-button');
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+
+            // Handle drink size selection
+            const sizeOptions = document.querySelectorAll('.size-option');
+            sizeOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    sizeOptions.forEach(opt => {
+                        opt.classList.remove('active');
+                        opt.querySelector('.size-circle').style.backgroundColor = '';
+                    });
+                    option.classList.add('active');
+                    option.querySelector('.size-circle').style.backgroundColor = '#B83556';
+                });
+            });
+
+            // Prevent clicks bubbling on cards
+            const productCards = document.querySelectorAll('.drinks-product-card');
+            productCards.forEach(card => {
+                card.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                });
+            });
+
+            // Add embed mode class
+            const isEmbed = new URLSearchParams(window.location.search).get("embed") === "true";
+            if (isEmbed) {
+                document.body.classList.add("embed-mode");
+            }
+        </script>
+        <script>
+            // Apply embed mode styling if ?embed=true is in the URL
+            if (window.location.search.includes('embed=true')) {
+                document.body.classList.add('embed-mode');
+            }
+        </script>
+            <!-- Cart Popup Container -->
+    <div id="cartContainer"></div>
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" style="display: none;"></div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                fetch('../tassnim/cart-popup.html')
+                    .then(res => res.text())
+                    .then(data => {
+                        document.getElementById('cartContainer').innerHTML = data;
+                        // Load cart logic
+                        const script = document.createElement('script');
+                        script.src = '../tassnim/script.js';
+                        document.body.appendChild(script);
+                        // Show popup on cart icon click
+                        const openCartBtn = document.getElementById('openCart');
+                        openCartBtn?.addEventListener('click', () => {
+                            if (window.showCartPopup) window.showCartPopup();
+                        });
+                        // Attach continueBtn handler
+                        const continueBtn = document.getElementById('continueBtn');
+                        if (continueBtn) {
+                            continueBtn.onclick = function() {
+                                if (window.hideCartPopup) window.hideCartPopup();
+                            };
+                        }
+                        // Attach backMenuBtn handler
+                        const backMenuBtn = document.getElementById('backMenuBtn');
+                        if (backMenuBtn) {
+                            backMenuBtn.onclick = function() {
+                                window.location.href = '../pages/index.html';
+                            };
+                        }
+                        // Logo click navigation
+                        const logo = document.getElementById('beangoLogo');
+                        if (logo) {
+                            logo.style.cursor = 'pointer';
+                            logo.onclick = function() {
+                                window.location.href = '../pages/home.html';
+                            };
+                        }
+                    });
+            });
+            </script>
+        
+        
+    </body>
+    </html>
+
